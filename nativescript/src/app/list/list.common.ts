@@ -1,14 +1,14 @@
 import { Routes } from "@angular/router";
 
 import { ListComponent } from "./list.component";
-import { ListService } from "./list.service";
+import { PokemonService } from "../pokemon/pokemon.service";
 
 export const COMPONENT_DECLARATIONS: any[] = [
   ListComponent
 ];
 
 export const PROVIDERS_DECLARATIONS: any[] = [
-  ListService
+  PokemonService
 ];
 
 export const ROUTES: Routes = [

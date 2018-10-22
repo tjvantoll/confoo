@@ -1,6 +1,6 @@
 import { knownFolders, File } from "tns-core-modules/file-system";
 
-export class ListHelper {
+export class PokemonHelper {
   saveFile: File;
 
   constructor() {

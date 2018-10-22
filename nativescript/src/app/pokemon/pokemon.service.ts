@@ -2,15 +2,15 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 
-import { ListHelper } from "./list.helper";
+import { PokemonHelper } from "./pokemon-helper";
 
 @Injectable()
-export class ListService {
+export class PokemonService {
   saved;
   helper;
 
   constructor(private http: HttpClient) {
-    this.helper = new ListHelper();
+    this.helper = new PokemonHelper();
     this.saved = this.helper.readItems();
   }
 

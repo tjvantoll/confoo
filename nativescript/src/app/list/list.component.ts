@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { ListService } from "./list.service";
+import { PokemonService } from "../pokemon/pokemon.service";
 
 @Component({
   selector: "app-list",
@@ -10,15 +10,15 @@ import { ListService } from "./list.service";
 export class ListComponent implements OnInit {
   items: any[];
 
-  constructor(private listService: ListService) { }
-
+  constructor(private pokemonService: PokemonService) {}
+  
   ngOnInit() {
-    this.listService.get().subscribe((data: any) => {
+    this.pokemonService.get().subscribe((data: any) => {
       this.items = data;
     });
   }
 
   itemTapped(item) {
-    this.listService.toggleSelected(item);
+    this.pokemonService.toggleSelected(item);
   }
 }

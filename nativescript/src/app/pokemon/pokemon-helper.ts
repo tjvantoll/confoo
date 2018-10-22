@@ -1,4 +1,4 @@
-export class ListHelper {
+export class PokemonHelper {
   readItems() {
     let saved = localStorage.getItem("items");
     if (saved) {
