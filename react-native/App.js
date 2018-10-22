@@ -22,7 +22,7 @@ class App extends Component {
           data.push(item);
         })
 
-        this.setState({ dataSource: data })
+        this.setState({ dataSource: data });
       })
   }
 
@@ -85,5 +85,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   }
 });
+
 
 export default App;

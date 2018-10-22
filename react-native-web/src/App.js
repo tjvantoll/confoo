@@ -22,7 +22,7 @@ class App extends Component {
           data.push(item);
         })
 
-        this.setState({ dataSource: data })
+        this.setState({ dataSource: data });
       })
   }
 
