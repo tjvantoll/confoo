@@ -14,16 +14,16 @@ class App extends Component {
       .then(async (responseJson) => {
         this.saved = await AsyncStorage.getItem("saved");
         this.saved = this.saved ? JSON.parse(this.saved) : [];
-
+        
         let results = responseJson.results;
         let data = [];
         results.forEach((item) => {
           item.selected = this.saved.indexOf(item.id) != -1;
           data.push(item);
         })
-
+        
         this.setState({ dataSource: data });
-      })
+      });
   }
 
   render() {
@@ -73,13 +73,14 @@ class App extends Component {
   }
 }
 
+
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 1,
     borderColor: "#C0C0C0"
-  }, 
+  },
   text: {
     fontSize: 15,
     paddingLeft: 10

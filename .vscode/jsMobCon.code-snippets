@@ -1,0 +1,306 @@
+{
+  "rn1": {
+    "scope": "javascript,typescript",
+    "prefix": "rn1",
+    "body": [
+"fetch(\"https://rawgit.com/tjvantoll/ShinyDex/master/assets/151.json\")",
+"  .then((response) => response.json())",
+"  .then(async (responseJson) => {",
+"    this.setState({ dataSource: responseJson.results })",
+"  });",
+    ],
+    "description": "rn1"
+  },
+
+  "rn2": {
+    "scope": "javascript,typescript",
+    "prefix": "rn2",
+    "body": [
+"<ScrollView>",
+"  <FlatList",
+"    data={this.state.dataSource}",
+"    renderItem={({item}) => this._renderListItem(item)}",
+"    keyExtractor={(item, index) => index.toString()}",
+"  />",
+"</ScrollView>"
+    ],
+    "description": "rn2"
+  },
+
+  "rn3": {
+    "scope": "javascript,typescript",
+    "prefix": "rn3",
+    "body": [
+"_renderListItem(item) {",
+"  return (",
+"    <TouchableWithoutFeedback",
+"      onPress={() => this._toggleSelected(item)}>",
+"      <View style={{backgroundColor: item.selected === true ? '#C0C0C0' : 'white'}}>",
+"        <View style={ styles.row }>",
+"          <Image",
+"            style={{width: 80, height: 80}}",
+"            source={{uri: item.image}}></Image>",
+"          <Text style={styles.text}>",
+"            {item.name}",
+"          </Text>",
+"        </View>",
+"      </View>",
+"    </TouchableWithoutFeedback>",
+"  )",
+"}",
+    ],
+    "description": "rn3"
+  },
+
+  "rn4": {
+    "scope": "javascript,typescript",
+    "prefix": "rn4",
+    "body": [
+"row: {",
+"  flexDirection: \"row\",",
+"  alignItems: \"center\",",
+"  borderBottomWidth: 1,",
+"  borderColor: \"#C0C0C0\"",
+"},",
+"text: {",
+"  fontSize: 15,",
+"  paddingLeft: 10",
+"}"
+    ],
+    "description": "rn4"
+  },
+
+  "rn5": {
+    "scope": "javascript,typescript",
+    "prefix": "rn5",
+    "body": [
+"_toggleSelected(item) {",
+"  let dataSource = [...this.state.dataSource];",
+"  let index = dataSource.indexOf(item);",
+"  dataSource[index].selected = !dataSource[index].selected;",
+"  this.setState({ dataSource });",
+"}"
+    ],
+    "description": "rn5"
+  },
+
+  "rn6": {
+    "scope": "javascript,typescript",
+    "prefix": "rn6",
+    "body": [
+"this.saved = [];"
+    ],
+    "description": "rn6"
+  },
+
+  "rn7": {
+    "scope": "javascript,typescript",
+    "prefix": "rn7",
+    "body": [
+"if (item.selected) {",
+"  this.saved.push(item.id);",
+"} else {",
+"  this.saved.splice(this.saved.indexOf(item.id), 1);",
+"}",
+"AsyncStorage.setItem(\"saved\", JSON.stringify(this.saved));",
+    ],
+    "description": "rn7"
+  },
+
+  "rn8": {
+    "scope": "javascript,typescript",
+    "prefix": "rn8",
+    "body": [
+"this.saved = await AsyncStorage.getItem(\"saved\");",
+"this.saved = this.saved ? JSON.parse(this.saved) : [];",
+"",
+"let results = responseJson.results;",
+"let data = [];",
+"results.forEach((item) => {",
+"  item.selected = this.saved.indexOf(item.id) != -1;",
+"  data.push(item);",
+"})",
+"",
+"this.setState({ dataSource: data });"
+    ],
+    "description": "rn8"
+  },
+
+  "ns1": {
+    "scope": "javascript,typescript",
+    "prefix": "ns1",
+    "body": [
+"import { PokemonService } from \"../pokemon/pokemon.service\";"
+    ],
+    "description": "ns1"
+  },
+
+  "ns2": {
+    "scope": "javascript,typescript",
+    "prefix": "ns2",
+    "body": [
+"items: any[];",
+"",
+"constructor(private pokemonService: PokemonService) {}",
+"",
+"ngOnInit() {",
+"  this.pokemonService.get().subscribe((data: any) => {",
+"    this.items = data;",
+"  });",
+"}"
+    ],
+    "description": "ns2"
+  },
+
+  "ns3": {
+    "scope": "html",
+    "prefix": "ns3",
+    "body": [
+"<ul>",
+"  <li *ngFor=\"let item of items\" [class.selected]=\"item.selected\" (click)=\"itemTapped(item)\">",
+"    <img [src]=\"item.image\">",
+"    <span>{{ item.name }}</span>",
+"  </li>",
+"</ul>"
+    ],
+    "description": "ns3"
+  },
+
+  "ns4": {
+    "scope": "html",
+    "prefix": "ns4",
+    "body": [
+"<ListView [items]=\"items\">",
+"  <ng-template let-item=\"item\">",
+"    <FlexboxLayout [class.selected]=\"item.selected\" (tap)=\"itemTapped(item, container)\" #container>",
+"      <Image [src]=\"item.image\"></Image>",
+"      <Label [text]=\"item.name\"></Label>",
+"    </FlexboxLayout>",
+"  </ng-template>",
+"</ListView>"
+    ],
+    "description": "ns4"
+  },
+
+  "n5": {
+    "scope": "css",
+    "prefix": "ns5",
+    "body": [
+"ul {",
+"  list-style: none;",
+"  padding: 0;",
+"  margin: 0;",
+"}",
+"",
+"li {",
+"  border-style: solid;",
+"  border-width: 0 0 1px 0;",
+"  border-color: #C0C0C0;",
+"  display: flex;",
+"  align-items: center;",
+"  cursor: pointer;",
+"}",
+"",
+"li.selected {",
+"  background-color: #C0C0C0;",
+"}",
+"",
+"img {",
+"  height: 96px;",
+"  width: 96px;",
+"}"
+    ],
+    "description": "ns5"
+  },
+
+  "ns6": {
+    "scope": "css",
+    "prefix": "ns6",
+    "body": [
+"FlexboxLayout {",
+"  padding: 5;",
+"  align-items: center;",
+"}",
+".selected {",
+"  background-color: #C0C0C0;",
+"}",
+"Image {",
+"  height: 80;",
+"  width: 80;",
+"}"
+    ],
+    "description": "ns6"
+  },
+
+  "ns7": {
+    "scope": "javascript,typescript",
+    "prefix": "ns7",
+    "body": [
+"itemTapped(item) {",
+"  this.pokemonService.toggleSelected(item);",
+"}"
+    ],
+    "description": "ns7"
+  },
+
+  "ns8": {
+    "scope": "javascript,typescript",
+    "prefix": "ns8",
+    "body": [
+"import { Component, OnInit } from \"@angular/core\";",
+"import { explode } from \"nativescript-explosionfield\";",
+"import { TNSPlayer } from \"nativescript-audio\";",
+"",
+"import { PokemonService } from \"../pokemon/pokemon.service\";",
+"",
+"@Component({",
+"  selector: \"app-list\",",
+"  templateUrl: \"./list.component.html\",",
+"  styleUrls: [\"./list.component.css\"]",
+"})",
+"export class ListComponent implements OnInit {",
+"  items: any[];",
+"  player: TNSPlayer;",
+"",
+"  constructor(private pokemonService: PokemonService) {",
+"    this.player = new TNSPlayer();",
+"    this.player.initFromFile({",
+"      audioFile: \"https://www.tjvantoll.com/explosion.mp3\",",
+"      loop: false",
+"    });",
+"  }",
+"",
+"  ngOnInit() {",
+"    this.pokemonService.get().subscribe((data: any) => {",
+"      this.items = data;",
+"    });",
+"  }",
+"",
+"  itemTapped(item, container) {",
+"    // this.pokemonService.toggleSelected(item);",
+"    this.player.play();",
+"    explode(container);",
+"  }",
+"}"
+    ],
+    "description": "ns8"
+  },
+
+  "ns9": {
+    "scope": "javascript,typescript",
+    "prefix": "ns9",
+    "body": [
+""
+    ],
+    "description": "ns9"
+  },
+
+  "ns10": {
+    "scope": "javascript,typescript",
+    "prefix": "ns10",
+    "body": [
+""
+    ],
+    "description": "ns10"
+  }
+}
