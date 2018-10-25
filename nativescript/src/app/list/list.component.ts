@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 
-import { PokemonService } from "../pokemon/pokemon.service";
-
 @Component({
   selector: "app-list",
   templateUrl: "./list.component.html",
@@ -10,15 +8,9 @@ import { PokemonService } from "../pokemon/pokemon.service";
 export class ListComponent implements OnInit {
   items: any[];
 
-  constructor(private pokemonService: PokemonService) {}
+  constructor() {}
   
   ngOnInit() {
-    this.pokemonService.get().subscribe((data: any) => {
-      this.items = data;
-    });
-  }
 
-  itemTapped(item) {
-    this.pokemonService.toggleSelected(item);
   }
 }
