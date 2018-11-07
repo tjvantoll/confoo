@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SharedApp from './src/SharedApp';
+import SharedApp from './SharedApp';
 
 type Props = {};
 export default class App extends Component<Props> {
